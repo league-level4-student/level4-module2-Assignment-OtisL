@@ -32,13 +32,20 @@ public class StringMethods {
 
 	// Given Strings s1 and s2, return the longer String
 	public static String longerString(String s1, String s2) {
-		return null;
+		if(s1.length()>s2.length()) {
+			return s1;
+		}else {
+			return s2;
+		}
 	}
 
 	
 	// if String s contains the word "underscores", change all of the spaces to underscores
 	public static String formatSpaces(String s) {
-		return null;
+		if(s.contains("underscores")) {
+			s=s.replace(' ', '_');
+		}
+		return s;
 	}
 
 	
@@ -46,29 +53,65 @@ public class StringMethods {
 	// You cannot assume there are no extra spaces around the name, but you can
 	// assume there is only one space between the first and last name
 	public static String lineLeader(String s1, String s2, String s3) {
-		return null;
+		s1=s1.trim();
+		s2=s2.trim();
+		s3=s3.trim();
+		String s1s = s1.split(" ")[1];
+		String s2s = s2.split(" ")[1];
+		String s3s = s3.split(" ")[1];
+		if(s1s.compareTo(s2s)<1) {
+			if(s1s.compareTo(s3s)<1) {
+				return s1;
+			}else {
+				return s3;
+			}
+		}else {
+			if(s2s.compareTo(s3s)<1) {
+				return s2;
+			}else {
+				return s3;
+			}
+		}
 	}
 	
 	
 	// Return the sum of all numerical digits in the String
 	public static int numeralSum(String s) {
-		return 0;
+		int total = 0;
+		for(int i=0; i<s.length(); i++) {
+			if(Character.isDigit(s.charAt(i))) {
+				total=total+Character.getNumericValue(s.charAt(i));
+			}
+		}
+		return total;
 	}
 	
 	
 	// Return the number of times String substring appears in String s
 	public static int substringCount(String s, String substring) {
+		int index = 0;
+		int times = 0;
+		while(s.indexOf(substring, index)>0) {
+			index = s.indexOf(substring, index)+substring.length();
+		}
 		return 0;
 	}
 
 	// Call Utitilities.encrypt to encrypt String s
 	public static String encrypt(String s, char key) {
-		return null;
+		byte[] bytes = s.getBytes();
+		String newKey = key+"";
+		byte keyByte = newKey.getBytes()[0];
+		String encrypted = Utilities.encrypt(bytes, keyByte);
+		return encrypted;
 	}
 
 	// Call Utilities.decrypt to decrypt the cyphertext
 	public static String decrypt(String s, char key) {
-		return null;
+		String newKey = key+"";
+		byte keyByte = newKey.getBytes()[0];
+		String decrypted = Utilities.decrypt(s, keyByte);
+		return decrypted;
 	}
 
 
