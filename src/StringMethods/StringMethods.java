@@ -91,10 +91,11 @@ public class StringMethods {
 	public static int substringCount(String s, String substring) {
 		int index = 0;
 		int times = 0;
-		while(s.indexOf(substring, index)>0) {
+		while(s.indexOf(substring, index)>=0) {
 			index = s.indexOf(substring, index)+substring.length();
+			times++;
 		}
-		return 0;
+		return times;
 	}
 
 	// Call Utitilities.encrypt to encrypt String s
@@ -118,7 +119,17 @@ public class StringMethods {
 	// Return the number of words in String s that end with String substring
 	// You can assume there are no punctuation marks between words
 	public static int wordsEndsWithSubstring(String s, String substring) {
-		return 0;
+		int index = 0;
+		int times = 0;
+		String[] newS=s.split(" ");
+		for(int i=0; i<newS.length; i++) {
+			if(newS[i].lastIndexOf(substring)>0) {
+				if(newS[i].lastIndexOf(substring)+substring.length()==newS[i].length()) {
+					times++;
+				}
+			}
+		}
+		return times;
 	}
 	
 
@@ -126,7 +137,12 @@ public class StringMethods {
 	// of String substring and the final occurrence
 	// You can assume that substring will appear at least twice
 	public static int distance(String s, String substring) {
-		return 0;
+		int first=0;
+		int second=0;
+		first=s.indexOf(substring)+substring.length();
+		second=s.lastIndexOf(substring);
+		
+		return second-first;
 	}
 
 
@@ -134,7 +150,18 @@ public class StringMethods {
 	// palindromes are words or phrases are read the same forward as backward.
 	// HINT: ignore/remove all punctuation and spaces in the String
 	public static boolean palindrome(String s) {
-		return true;
+		s=s.trim();
+		String newS = "";
+		s=s.replaceAll("[^a-zA-Z]", "");
+		s=s.toLowerCase();
+		for(int i=s.length()-1; i>=0; i--) {
+			newS+=s.charAt(i);
+		}
+		if(newS.equals(s)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }
